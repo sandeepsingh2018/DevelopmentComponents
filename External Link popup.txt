@@ -1,0 +1,11 @@
+1: Scripts.JS
+	//'.shareComponent','.sharePartialComponent','.shareComponentMail','.sharePartialComponentMail','.shareComponentWhatsapp','.sharePartialComponentWhatsapp',
+	$("a:not('.shareComponent')a:not('.sharePartialComponent')a:not('.shareComponentMail')a:not('.sharePartialComponentMail')a:not('.shareComponentWhatsapp')a:not('.sharePartialComponentWhatsapp')a:not([href=''],[href^='/'],[href*='" + document.domain + "'],[href^='~'],[href^='#'],[href^='javascript'],[href^='mailto'],[href^='tel'])a[href]").click(function () {
+		if ($("#IsDisclaimerEnable").val()) {
+			return confirm($("#confirm").val().replace("<br />", "\n"));
+		}
+	});
+
+2: BaseLayout.cshtml
+	 <input type="hidden" name="confirm" id="confirm" value="@globalConfiguration.GetSettings("PopUpDisclaimerText")" />
+    <input type="hidden" name="IsDisclaimerEnable" id="IsDisclaimerEnable" value="@isDisclaimerEnable" />
