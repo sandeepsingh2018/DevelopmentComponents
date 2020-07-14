@@ -9,3 +9,6 @@
 2: BaseLayout.cshtml
 	 <input type="hidden" name="confirm" id="confirm" value="@globalConfiguration.GetSettings("PopUpDisclaimerText")" />
     <input type="hidden" name="IsDisclaimerEnable" id="IsDisclaimerEnable" value="@isDisclaimerEnable" />
+
+3: Content
+	Please be aware that by clicking OK, you are leaving the ClinicalResearch.com website. The terms of use and privacy policy on other websites may be different from those of this website. Please refer to the privacy policies and terms of use of these other websites as we cannot control or be responsible for their policies, terms of use, or legal/regulatory compliance.
