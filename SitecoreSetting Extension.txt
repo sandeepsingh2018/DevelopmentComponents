@@ -1,0 +1,28 @@
+1: Layout
+	@using Quintiles.Sitecore.ClinicalResearch.Utilities;
+	
+	@{
+    var globalConfiguration = System.Configuration.ConfigurationManager.AppSettings["CR-GlobalConfiguration"];
+    var isDisclaimerEnable = globalConfiguration.GetSettings("IsDisclaimerEnable");
+    }
+	
+2: StringExtention.cs
+	public static string GetSettings(this string node, string field)
+        {
+            log.Info("Utilities StringExtensions  GetSettings  :Start " + "----[" + DateTime.UtcNow + " ]----");
+            if (SiteContext.Current == null) return string.Empty;
+            var masterDB = Factory.GetSite(SiteContext.Current.Name).Database;
+            var pageWordForSearch = masterDB.Items.GetItem(node);
+            log.Info("Utilities StringExtensions  GetSettings  :End " + "----[" + DateTime.UtcNow + " ]----");
+            return pageWordForSearch != null ? pageWordForSearch.Fields[field].Value.Replace("\r\n", ", ") : string.Empty;
+        }
+        public static string GetSettings(this string node, string field, SitecoreData.Database master)
+        {
+            log.Info("Utilities StringExtensions  GetSettings without Context   :Start " + "----[" + DateTime.UtcNow + " ]----");
+            var pageWordForSearch = master.Items.GetItem(node);
+            log.Info("Utilities StringExtensions  GetSettings without Context  :End " + "----[" + DateTime.UtcNow + " ]----");
+            return pageWordForSearch != null ? pageWordForSearch.Fields[field].Value.Replace("\r\n", ", ") : string.Empty;
+        }
+		
+		<input type="hidden" name="confirm" id="confirm" value="@globalConfiguration.GetSettings("PopUpDisclaimerText")" />
+    <input type="hidden" name="IsDisclaimerEnable" id="IsDisclaimerEnable" value="@isDisclaimerEnable" />
