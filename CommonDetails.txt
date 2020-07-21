@@ -1,0 +1,2 @@
+=>Carousel Component
+	query:/sitecore/content/*/Global/Media//*[@@templateid='{F0369E1A-9030-4A05-A09C-EF09B664ED27}' or @@templateid='{F1C095E2-B3E0-46D0-B838-02A9E8B880D9}']
