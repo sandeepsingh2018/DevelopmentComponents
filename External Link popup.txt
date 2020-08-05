@@ -10,12 +10,17 @@
 	 <input type="hidden" name="confirm" id="confirm" value="@globalConfiguration.GetSettings("PopUpDisclaimerText")" />
     <input type="hidden" name="IsDisclaimerEnable" id="IsDisclaimerEnable" value="@isDisclaimerEnable" />
 
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 6LffrroZAAAAAFx7ZwHF2ybXp0imdm-rKG-LLx2D
 Secret-Key: 6LffrroZAAAAAFCa7oAGlk4I_-KTlCR2LapmLmlN
 
 6LdvsboZAAAAAD54BWEhn9FAV9t-rBFzmPwo_-2Q
 
 v2-6LeXtLoZAAAAAM98F9w0Svc9-6YedpsI5OkhUhyU
+
+idb:
+	V2- 6LfptboZAAAAAO6THEY_Hr39_J6NLPS_00XltZZH
 
 <form action="?" method="POST">
       <div class="g-recaptcha" data-sitekey="your_site_key"></div>
