@@ -22,3 +22,9 @@ v2-6LeXtLoZAAAAAM98F9w0Svc9-6YedpsI5OkhUhyU
       <br/>
       <input type="submit" value="Submit">
     </form>
+
+<script type="text/javascript">
+  var onloadCallback = function() {
+    alert("grecaptcha is ready!");
+  };
+</script>
