@@ -1,0 +1,56 @@
+@using Sitecore.Mvc;
+@using Quintiles.Sitecore.ePatient.Helpers.Extensions;
+
+@{    
+    var globalData = Sitecore.Context.Database.GetItem(System.Configuration.ConfigurationManager.AppSettings["TecGistry-GlobalData"]);   
+    var cookieName = globalData.Fields["CookieName"].ToString();
+}
+
+<input type="hidden" id="cookieName" value="@cookieName" />
+
+@if (Request.Cookies[cookieName] == null)
+{     
+    if (globalData.Fields["DisplayCookieDisclaimer"].ToBool())
+    {
+    <div id="CookiePopupDiv" class="row cookie" data-label="cookie-bar">
+        
+        <div class="text col-xs-10">
+            @Html.Raw(globalData.Fields["CookiesDisclaimerContent"])
+        </div>
+       
+        <div class="col-xs-1 closeIcon" data-label="btn-close-cookie-bar" onclick="navigation_event()" >           
+            <span><strong>&times;</strong></span>
+        </div>
+    </div>
+    }
+}
+
+
+===========================
+function HideCookieDiv(element, acceptanceFlag) {
+    $("#" + element).hide();
+    if (acceptanceFlag == "true") {
+        document.cookie = "TecGistryAcceptanceCookie=" + acceptanceFlag + " ;path=/ ;expires=" + dateAdd(new Date(), 'year', 1).toLocaleString();
+    }
+    else {
+        document.cookie = "TecGistryAcceptanceCookie=" + acceptanceFlag + " ;path=/ ;expires=" + dateAdd(new Date(), 'second', 1).toLocaleString();
+    }
+}
+
+function navigation_event()
+{
+    $("#CookiePopupDiv").hide();
+    var cookieName = $("#cookieName").val();
+    var date = new Date();
+    var m = 365;
+    date.setTime(date.getTime() + (m * 30 * 60 * 60 * 1000));
+    $.cookie(cookieName, "CookieConsent", { expires: date });
+}
+
+$("a").click(function () {   
+    navigation_event();
+});
+
+$("input[type='submit']").click(function () {
+    navigation_event();
+});
