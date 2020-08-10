@@ -54,3 +54,16 @@ $("a").click(function () {
 $("input[type='submit']").click(function () {
     navigation_event();
 });
+
+=====================================
+public static bool ToBool(this Field f, bool defaultValue = false)
+        {
+            if (f == null) return defaultValue;
+            return System.Convert.ToBoolean(string.IsNullOrWhiteSpace(f.Value) ? defaultValue : !defaultValue);
+        }
+
+        public static bool ToBool(this HtmlString f, bool defaultValue = false)
+        {
+            if (f == null) return defaultValue;
+            return System.Convert.ToBoolean(string.IsNullOrWhiteSpace(f.ToString()) ? defaultValue : !defaultValue);
+        }
