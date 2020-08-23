@@ -1,0 +1,70 @@
+============
+$('.filterSelect').click(function () {
+	var filter = $(this).data("value");
+	addAllCTA();
+	filterList(filter);
+	$('.filterSelect').removeClass("active");
+	//$(this).addClass("active");
+	$(this).addClass("active").blur();
+});
+
+================================
+function filterList(val) {
+	var articleList = $(".userType");
+	$(articleList).parent().hide();
+	if ($.isArray(val)) {
+		if ($.isEmptyObject(val)) {
+			$(".paginateClass").find(".userType").each(function (i) {
+				$(this).parent().show();
+			});
+			isCTAFiltered = false;
+		}
+		else {
+			if ((val[0].length > 0) && (val[1].length > 0)) {
+				$.each(val[0], function (index, value) {
+					$.each(val[1], function (index, val) {
+						$(".paginateClass").find(".userType[data-condtiontype*=" + value + "].userType[data-topictype*=" + val + "]").each(function (i) {
+							$(this).parent().show();
+						});
+					});
+				});
+			}
+			else if (val[0].length > 0) {
+				$.each(val[0], function (index, val) {
+					$(".paginateClass").find(".userType[data-condtiontype*=" + val + "]").each(function (i) {
+						$(this).parent().show();
+					});
+				});
+			}
+			else if (val[1].length > 0) {
+				$.each(val[1], function (index, val) {
+					$(".paginateClass").find(".userType[data-topictype*=" + val + "]").each(function (i) {
+						$(this).parent().show();
+					});
+				});
+			}
+			isCTAFiltered = true;
+		}
+	}
+	else {
+		if (val == "All") {
+			$(".paginateClass").find(".userType").each(function (i) {
+				$(this).parent().show();
+			});
+		}
+		else {
+			$(".paginateClass").find(".userType[data-audiencetype*=" + val + "]").each(function (i) {
+				$(this).parent().show();
+			});
+		}
+	}
+	$(".paginateClass").find(".userType").each(function (i) {
+		if ($(this).parent().css('display') == 'none') {
+			$(this).parent().remove();
+		}
+	});
+	filterCTA = [];
+	$(".paginateClass").find(".userType").each(function () {
+		filterCTA.push($(this).parent());
+	});
+}
