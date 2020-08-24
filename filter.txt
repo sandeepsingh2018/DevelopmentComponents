@@ -1,3 +1,8 @@
+Video:
+<video class="video-bg" loop autoplay muted>
+      <source src="@Model.MediaUrl" type="@Model.MediaType/@Model.MediaFormat">
+    </video>
+
 ============
 $('.filterSelect').click(function () {
 	var filter = $(this).data("value");
